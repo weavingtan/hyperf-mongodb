@@ -9,6 +9,7 @@ use Hyperf\Mongodb\Traits\Attributes;
 use Hyperf\Mongodb\Traits\LogFile;
 use Hyperf\Mongodb\Traits\Result;
 use Hyperf\Utils\Context;
+use MongoDB\Driver\Exception\Exception;
 
 /**
  * Class MongoDb
@@ -347,7 +348,7 @@ class MongoDb
      * @param array $lookups
      * @return mixed
      * @throws MongoDBException
-     * @throws \MongoDB\Driver\Exception\Exception
+     * @throws Exception
      */
     public function command(array $where = [],array $filter = [],array $group = [],array $sort = [],array $lookups = [], $skip = 0, $limit = 0)
     {
@@ -390,11 +391,12 @@ class MongoDb
 
     /**
      * @param array $where
+     * @param array $fields
+     * @param array $group
+     * @param array $sort
+     * @param array $lookups
      * @param int $skip
      * @param int $limit
-     * @param array $sort
-     * @param array $fields
-     * @param array $lookups
      * @return array        返回pipeline
      */
     private function getPipeline(array $where = [], array $fields = [],array $group=[], array $sort = [], array $lookups = [], $skip = 0, $limit = 0)

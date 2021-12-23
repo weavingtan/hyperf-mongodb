@@ -9,6 +9,8 @@
 namespace Hyperf\Mongodb\Traits;
 
 
+use MongoDB\BSON\ObjectId;
+
 trait Attributes {
 
 
@@ -25,10 +27,10 @@ trait Attributes {
 
     public function fromIdObj($data){
         if (!is_array($data)){
-            $data = new \MongoDB\BSON\ObjectId($data);
+            $data = new ObjectId($data);
         }else{
             foreach ($data as &$value){
-                $data = new \MongoDB\BSON\ObjectId($value);
+                $data = new ObjectId($value);
             }
         }
         return $data;
